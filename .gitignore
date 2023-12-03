@@ -38,9 +38,8 @@ tsconfig.json
 *.tmp
 
 # npm package files
-*.json
 *.lock
-
+package-lock.json
 # Yarn
 yarn-error.log
 yarn.lock
