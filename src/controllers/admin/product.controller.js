@@ -37,13 +37,9 @@ exports.getAllProducts = async (req, res, next) => {
 };
 exports.updateProduct = async (req, res, next) => {
   try {
-    let id = req?.body?._id;
+    let {_id,...updateduser} = req?.body;
     let ProductData;
-    ProductData = await Product.findByIdAndUpdate(id, {
-      name: req.body.name,
-      image: req.body.image,
-      description: req.body.description,
-    });
+    ProductData = await Product.findByIdAndUpdate(_id, updateduser);
     if (!ProductData) {
       throw new Error("Product not found");
     }
@@ -58,14 +54,14 @@ exports.updateProduct = async (req, res, next) => {
 exports.deleteProduct = async (req, res, next) => {
   try {
     const { id } = req.params;
-    const products = await Product.findByIdAndDelete(id);
+    const product = await Product.findByIdAndDelete(id);
     if (!products) {
       throw new Error("product not found");
     }
     return res.send({
       success: true,
       message: "product deleted successfully",
-      products,
+      product,
     });
   } catch (error) {
     next(error);

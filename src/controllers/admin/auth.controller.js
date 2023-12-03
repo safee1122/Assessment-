@@ -1,5 +1,6 @@
 const jwt = require("jsonwebtoken");
 const passport = require("passport");
+const roleModel = require("../../models/role.model");
 
 /**
  * Login
@@ -32,7 +33,7 @@ exports.login = async (req, res, next) => {
             email: user.email,
             firstname: user.firstname,
             lastname: user.lastname,
-            role: user.userRole,
+            userRole: user.userRole,
             userId: user._id,
           },
         });
@@ -42,4 +43,20 @@ exports.login = async (req, res, next) => {
       return next(error);
     }
   })(req, res, next);
+};
+exports.getRoles = async (req, res, next) => {
+  try {
+    const roles = await roleModel.find();
+    if (!roles?.length) {
+      throw new Error("Roles not found");
+    }
+    data = roles.map((role) => ({ value: role._id, label: role.name }));
+    return res.send({
+      success: true,
+      message: "Roles retrieved successfully",
+      roles: data,
+    });
+  } catch (error) {
+    next(error);
+  }
 };

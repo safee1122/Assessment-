@@ -21,8 +21,8 @@ router
   );
 router.route("/").get(controller.getAllProducts);
 router
-  .route("/:id")
-  .delete(
+  .route("/update")
+  .post(
     checkPermission("update:product"),
     productValidationRules(),
     validate,

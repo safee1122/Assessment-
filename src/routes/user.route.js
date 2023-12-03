@@ -23,6 +23,6 @@ router
 router.route("/").get(checkPermission("get:user:all"), controller.getUsers);
 router
   .route("/delete/:id")
-  .post(checkPermission("delete:user:all"), controller.deleteUser);
+  .delete(checkPermission("delete:user"), controller.deleteUser);
 
 module.exports = router;
