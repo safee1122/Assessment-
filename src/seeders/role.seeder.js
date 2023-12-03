@@ -45,9 +45,6 @@ const seedRoles = async () => {
     console.log("Roles seeded successfully:", createdRoles);
   } catch (error) {
     console.error("Error seeding roles:", error);
-  } finally {
-    // Close the Mongoose connection
-    mongoose.connection.close();
   }
 };
 
@@ -57,7 +54,8 @@ const seedRoles = async () => {
     const conn = await mongoose.connect(mongo.uri);
     console.log(`mongodb is connected ${conn.connection.host}`);
     // Call the seedRoles function
-    seedRoles();
+    await seedRoles();
+    await mongoose.connection.close();
   } catch (error) {
     console.log("====================================");
     console.log(error);
