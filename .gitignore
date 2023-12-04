@@ -16,7 +16,7 @@ Thumbs.db
 .env
 
 # Build output
-/build
+# /build
 
 # Dependency directories
 /jspm_packages/
@@ -49,7 +49,7 @@ node_modules/
 jspm_packages/
 
 # Production build
-dist/
+# dist/
 
 # Testing
 coverage/
